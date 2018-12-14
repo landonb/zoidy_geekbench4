@@ -1,2 +1,21 @@
 ---
 # defaults file for zoidy_geekbench4
+
+# DEVS: Update this version as appropriate.
+zoidy_geekbench4_app_version: '4.3.1'
+zoidy_geekbench4_app_prgname: 'Geekbench-{{ zoidy_geekbench4_app_version }}-Linux'
+zoidy_geekbench4_app_archive: "{{ zoidy_geekbench4_app_prgname }}.tar.gz"
+# 2018-12-13: The latest download is at, e.g.,
+#   http://cdn.geekbench.com/Geekbench-4.3.1-Linux.tar.gz
+zoidy_geekbench4_app_downurl: "http://cdn.geekbench.com/{{ zoidy_geekbench4_app_archive }}"
+
+now_date: "{{ lookup('pipe', 'date -d \"now\" +\"%Y_%m_%d\"') }}"
+
+# DEVS: You'll find files on the host at, e.g.,
+#   /home/user/Documents/2018_12_13-geekbench4/
+zoidy_geekbench4_working_dir: "/{{ ansible_env.HOME }}/Documents/{{ now_date }}-geekbench4"
+
+zoidy_geekbench4_working_tar: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_archive }}"
+zoidy_geekbench4_program_dir: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_prgname }}"
+zoidy_geekbench4_results_lnk: "{{ zoidy_geekbench4_working_dir }}/geekbench-results.lnk"
+
