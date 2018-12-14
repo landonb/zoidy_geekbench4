@@ -13,7 +13,7 @@ now_date: "{{ lookup('pipe', 'date -d \"now\" +\"%Y_%m_%d\"') }}"
 
 # DEVS: You'll find files on the host at, e.g.,
 #   /home/user/Documents/2018_12_13-geekbench4/
-zoidy_geekbench4_working_dir: "/{{ ansible_env.HOME }}/Documents/{{ now_date }}-geekbench4"
+zoidy_geekbench4_working_dir: "{{ ansible_env.HOME }}/Documents/{{ now_date }}-geekbench4"
 
 zoidy_geekbench4_working_tar: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_archive }}"
 zoidy_geekbench4_program_dir: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_prgname }}"
