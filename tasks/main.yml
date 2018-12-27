@@ -1,15 +1,10 @@
 ---
 
-# Main task: Benchmark at most once daily, checking if
-# the target exists to decide whether to branch or not.
-
-- name: 'Idempotence: Check complete: zoidy_geekbench4'
-  stat: path={{ zoidy_geekbench4_results_lnk }}
-  register: zoidy_geekbench4_target
-
-- name: Run Benchmark once just once
+- name: Run Benchmark only when specifically requested via --tags
   include_role:
     name: zoidy_geekbench4
     tasks_from: benchmark
-  when: not zoidy_geekbench4_target.stat.exists
+  tags:
+    - never
+    - zoidy_geekbench4
 
