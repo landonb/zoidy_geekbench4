@@ -2,7 +2,9 @@
 # defaults file for zoidy_geekbench4
 
 # DEVS: Update this version as appropriate.
-zoidy_geekbench4_app_version: '4.3.1'
+# MAYBE/2018-12-26: Add version watcher for Geekbench.
+#   https://www.geekbench.com/download/linux/
+zoidy_geekbench4_app_version: '4.3.2'
 zoidy_geekbench4_app_prgname: 'Geekbench-{{ zoidy_geekbench4_app_version }}-Linux'
 zoidy_geekbench4_app_archive: "{{ zoidy_geekbench4_app_prgname }}.tar.gz"
 # 2018-12-13: The latest download is at, e.g.,
