@@ -11,9 +11,9 @@ zoidy_geekbench4_app_archive: "{{ zoidy_geekbench4_app_prgname }}.tar.gz"
 #   http://cdn.geekbench.com/Geekbench-4.3.1-Linux.tar.gz
 zoidy_geekbench4_app_downurl: "http://cdn.geekbench.com/{{ zoidy_geekbench4_app_archive }}"
 
-# DEVS: You'll find files on the host at, e.g.,
-#   ~/Documents/zoidy_matecocido/
-zoidy_geekbench4_working_dir: "{{ ansible_env.HOME }}/Documents/zoidy_geekbench4"
+# DEVS: You'll find files on the host under:
+#   ~/.local/share/zoidy_geekbench4/
+zoidy_geekbench4_working_dir: "{{ ansible_env.HOME }}/.local/share/zoidy_geekbench4"
 
 zoidy_geekbench4_working_tar: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_archive }}"
 zoidy_geekbench4_program_dir: "{{ zoidy_geekbench4_working_dir }}/{{ zoidy_geekbench4_app_prgname }}"
