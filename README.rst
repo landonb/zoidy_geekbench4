@@ -13,13 +13,15 @@ There are 2 interesting values.
 
     zoidy_geekbench4_app_version: '4.x.x'
 
-- Find working files and results in user home on the host::
+- You'll find benchmark result URLs stored on the host in a single file::
 
-    zoidy_geekbench4_working_dir: "/{{ ansible_env.HOME }}/Documents/{{ now_date }}-geekbench4"
+    ~/.local/share/zoidy_geekbench4/$(hostname)-geekbench-results.lnk
 
-  For instance, you might find the results at::
+  as indicated by the two variables::
 
-    /home/user/Documents/2018_12_13-geekbench4/
+    zoidy_geekbench4_working_dir: "{{ ansible_env.HOME }}/.local/share/zoidy_geekbench4"
+
+    zoidy_geekbench4_results_lns: "{{ zoidy_geekbench4_working_dir }}/{{ ansible_hostname }}-geekbench4-results.txt"
 
 Example Playbook
 ----------------
