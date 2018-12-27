@@ -38,7 +38,7 @@
     geekbench4_results_url: "{{ geekbench4_output.stdout_lines[-1] | trim }}"
 
 - name: Copy geekbench4 output to geekbench stdout file
-  copy: content="{{ geekbench4_results_url }}" dest="{{ zoidy_geekbench4_results_lnk }}"
+  shell: echo "{{ geekbench4_results_url }}" >> "{{ zoidy_geekbench4_results_lns }}"
 
 - name: Tell user where to find geekbench4 results
   debug:
