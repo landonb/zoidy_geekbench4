@@ -1,7 +1,7 @@
 ---
 
 - name: Run Benchmark only when specifically requested via --tags
-  include_role:
+  ansible.builtin.include_role:
     name: zoidy_geekbench4
     tasks_from: benchmark
   tags:

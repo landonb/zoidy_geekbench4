@@ -4,19 +4,19 @@
 # and open the results in a new browser window.
 
 - name: Ensure the working directory exists
-  file: path={{ zoidy_geekbench4_working_dir }} state=directory
+  ansible.builtin.file: path={{ zoidy_geekbench4_working_dir }} state=directory
 
 - name: Ensure the results file exists
-  file: path={{ zoidy_geekbench4_results_lns }} state=touch
+  ansible.builtin.file: path={{ zoidy_geekbench4_results_lns }} state=touch
 
 # MAYBE/2018-12-26: Remove old versions' downloads and unpacked archives.
 
 - name: Stat geekbench4 archive before downloading
-  stat: path={{ zoidy_geekbench4_working_tar }}
+  ansible.builtin.stat: path={{ zoidy_geekbench4_working_tar }}
   register: zoidy_geekbench4_archive
 
 - name: Fetch the geekbench4 archive, if necessary
-  get_url:
+  ansible.builtin.get_url:
     url: '{{ zoidy_geekbench4_app_downurl }}'
     dest: "{{ zoidy_geekbench4_working_dir }}/"
   # Avoid connecting to the CDN server if the file exists locally.
@@ -25,7 +25,7 @@
   when: zoidy_geekbench4_archive.stat.exists == False
 
 - name: Unarchive the geekbench4 archive
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ zoidy_geekbench4_working_tar }}"
     dest: "{{ zoidy_geekbench4_working_dir }}/"
     # We could instead download to the master,
@@ -34,24 +34,24 @@
     remote_src: yes
 
 - name: Benchmark the host! Run geekbench4
-  shell: ./geekbench4
+  ansible.builtin.shell: ./geekbench4
   args:
     chdir: "{{ zoidy_geekbench4_program_dir }}"
   register: geekbench4_output
 
-- set_fact:
+- ansible.builtin.set_fact:
     geekbench4_results_url: "{{ geekbench4_output.stdout_lines[-1] | trim }}"
 
 - name: Copy geekbench4 output to geekbench stdout file
-  shell: echo "{{ geekbench4_results_url }}" >> "{{ zoidy_geekbench4_results_lns }}"
+  ansible.builtin.shell: echo "{{ geekbench4_results_url }}" >> "{{ zoidy_geekbench4_results_lns }}"
 
 - name: Tell user where to find geekbench4 results
-  debug:
+  ansible.builtin.debug:
     msg: >
           You'll find the geekbench4 results here!
 
             {{ geekbench4_results_url }}
 
 - name: Open geekbench4 results in browser window locally
-  local_action: command sensible-browser {{ geekbench4_results_url }}
+  ansible.builtin.local_action: command sensible-browser {{ geekbench4_results_url }}
 
