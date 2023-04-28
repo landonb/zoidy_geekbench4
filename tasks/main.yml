@@ -1,10 +1,12 @@
 ---
 
-- name: Run Benchmark only when specifically requested via --tags
+# The author's convention is to dispatch tasks, even when there's only one.
+# - Hence this file might appear somewhat pointless.
+
+- name: Run Geekbench 4 benchmark task
   ansible.builtin.include_role:
     name: zoidy_geekbench4
     tasks_from: benchmark
-  tags:
-    - never
-    - zoidy_geekbench4
+    apply: { tags: always }
+  tags: benchmark
 
